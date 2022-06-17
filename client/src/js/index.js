@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import ReactDOM from 'react-dom';
+import { createRoot } from 'react-dom/client';
 import axios from 'axios';
 
 const Layout = props => {
@@ -13,4 +13,5 @@ const Layout = props => {
 };
 
 const app = document.getElementById('app');
-ReactDOM.render(<Layout />, app);
+const root = createRoot(app);
+root.render(<Layout />);
