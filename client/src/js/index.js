@@ -6,10 +6,11 @@ const Layout = props => {
     const [test, setTest] = useState("");
     useEffect(() => {
         (async () => {
-            setTest((await axios("http://localhost:8081/test")).data);
+            const units = (await axios("http://localhost:8081/test")).data;
+            setTest(JSON.stringify(units));
         })();
-    });
-    return <h1>{test}</h1>
+    }, []);
+    return <p>{test}</p>
 };
 
 const app = document.getElementById('app');
