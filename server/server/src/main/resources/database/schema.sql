@@ -1,0 +1,7 @@
+-- m_unit
+CREATE TABLE IF NOT EXISTS m_unit(
+    id BIGINT AUTO_INCREMENT NOT NULL,
+    name VARCHAR(32) NOT NULL,
+    image_color VARCHAR(6) NOT NULL,
+    PRIMARY KEY(id)
+);
