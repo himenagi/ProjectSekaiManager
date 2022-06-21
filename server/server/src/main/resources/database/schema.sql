@@ -2,6 +2,8 @@ CREATE TABLE IF NOT EXISTS m_unit(
     id BIGINT AUTO_INCREMENT NOT NULL COMMENT 'ユニットID',
     name VARCHAR(32) NOT NULL COMMENT 'ユニット名',
     image_color VARCHAR(6) NOT NULL COMMENT 'イメージカラー',
+    created_time DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '登録日時',
+    updated_time DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '更新日時',
     PRIMARY KEY(id)
 )
 DEFAULT CHARSET = utf8
@@ -12,6 +14,8 @@ CREATE TABLE IF NOT EXISTS m_character(
     name VARCHAR(32) NOT NULL COMMENT 'キャラクター名',
     unit_id BIGINT NOT NULL COMMENT 'ユニットID',
     image_color VARCHAR(6) NOT NULL COMMENT 'イメージカラー',
+    created_time DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '登録日時',
+    updated_time DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '更新日時',
     PRIMARY KEY(id),
     CONSTRAINT fk_m_character_unit_id
         FOREIGN KEY (unit_id)
@@ -23,6 +27,8 @@ COMMENT 'キャラクターマスタ';
 CREATE TABLE IF NOT EXISTS m_character_mission(
     id BIGINT AUTO_INCREMENT NOT NULL COMMENT 'キャラクターミッションID',
     content VARCHAR(128) NOT NULL COMMENT 'ミッション内容',
+    created_time DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '登録日時',
+    updated_time DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '更新日時',
     PRIMARY KEY(id)
 )
 DEFAULT CHARSET = utf8
@@ -32,6 +38,8 @@ CREATE TABLE IF NOT EXISTS m_character_mission_request_count(
     id BIGINT AUTO_INCREMENT NOT NULL COMMENT 'キャラクターミッション要求数ID',
     character_mission_id BIGINT NOT NULL COMMENT 'キャラクターミッションID',
     request_count INT NOT NULL COMMENT '要求数',
+    created_time DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '登録日時',
+    updated_time DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '更新日時',
     PRIMARY KEY(id),
     CONSTRAINT fk_m_charcter_mission_character_mission_id
         FOREIGN KEY (character_mission_id)
@@ -43,6 +51,8 @@ COMMENT 'キャラクターミッション要求数マスタ';
 CREATE TABLE IF NOT EXISTS m_skill(
     id BIGINT AUTO_INCREMENT NOT NULL COMMENT 'スキルID',
     content VARCHAR(128) NOT NULL COMMENT 'スキル内容',
+    created_time DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '登録日時',
+    updated_time DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '更新日時',
     PRIMARY KEY(id)
 )
 DEFAULT CHARSET = utf8
@@ -57,6 +67,8 @@ CREATE TABLE IF NOT EXISTS m_skill_effect_size(
     value3 INT COMMENT '効果量3',
     value4 INT COMMENT '効果量4',
     value5 INT COMMENT '効果量5',
+    created_time DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '登録日時',
+    updated_time DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '更新日時',
     PRIMARY KEY(id),
     CONSTRAINT fk_m_skill_effect_size_skill_id
         FOREIGN KEY (skill_id)
@@ -77,6 +89,8 @@ CREATE TABLE IF NOT EXISTS t_card(
     technique INT NOT NULL COMMENT 'テクニック',
     stamina INT NOT NULL COMMENT 'スタミナ',
     skill_id BIGINT NOT NULL COMMENT 'スキルID',
+    created_time DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '登録日時',
+    updated_time DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '更新日時',
     PRIMARY KEY(id),
     CONSTRAINT fk_t_card_character_id
         FOREIGN KEY (character_id)
@@ -96,6 +110,8 @@ CREATE TABLE IF NOT EXISTS t_character_mission_progress(
     character_id BIGINT NOT NULL COMMENT 'キャラクターID',
     character_mission_id BIGINT NOT NULL COMMENT 'キャラクターミッションID',
     completed_request_count_id BIGINT NOT NULL COMMENT 'キャラクターミッション要求数ID',
+    created_time DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '登録日時',
+    updated_time DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '更新日時',
     PRIMARY KEY(id),
     CONSTRAINT fk_t_character_mission_progress_character_id
         FOREIGN KEY (character_id)
@@ -114,6 +130,8 @@ CREATE TABLE IF NOT EXISTS t_challenge_stage(
     id BIGINT AUTO_INCREMENT NOT NULL COMMENT 'チャレンジステージID',
     character_id BIGINT NOT NULL COMMENT 'キャラクターID',
     stage_count INT NOT NULL COMMENT 'ステージ数',
+    created_time DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '登録日時',
+    updated_time DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '更新日時',
     PRIMARY KEY(id),
     CONSTRAINT fk_t_challenge_stage_character_id
         FOREIGN KEY (character_id)
@@ -126,6 +144,8 @@ CREATE TABLE IF NOT EXISTS t_side_story_progress(
     id BIGINT AUTO_INCREMENT NOT NULL COMMENT 'サイドストーリー進捗ID',
     card_id BIGINT NOT NULL COMMENT 'カードID',
     progress SMALLINT NOT NULL COMMENT '進捗',
+    created_time DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '登録日時',
+    updated_time DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '更新日時',
     PRIMARY KEY(id),
     CONSTRAINT fk_t_side_story_progress_character_id
         FOREIGN KEY (card_id)
@@ -138,6 +158,8 @@ CREATE TABLE IF NOT EXISTS t_master_rank(
     id BIGINT AUTO_INCREMENT NOT NULL COMMENT 'マスターランクID',
     card_id BIGINT NOT NULL COMMENT 'カードID',
     master_rank SMALLINT NOT NULL COMMENT 'マスターランク',
+    created_time DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '登録日時',
+    updated_time DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '更新日時',
     PRIMARY KEY(id),
     CONSTRAINT fk_t_master_rank_character_id
         FOREIGN KEY (card_id)
@@ -150,6 +172,8 @@ CREATE TABLE IF NOT EXISTS t_skill_level(
     id BIGINT AUTO_INCREMENT NOT NULL COMMENT 'スキルレベルID',
     card_id BIGINT NOT NULL COMMENT 'カードID',
     level SMALLINT NOT NULL COMMENT 'スキルレベル',
+    created_time DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '登録日時',
+    updated_time DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '更新日時',
     PRIMARY KEY(id),
     CONSTRAINT fk_t_skill_level_character_id
         FOREIGN KEY (card_id)
@@ -165,6 +189,8 @@ CREATE TABLE IF NOT EXISTS t_costume(
     character_id BIGINT NOT NULL COMMENT 'キャラクターID',
     acquisition_method SMALLINT NOT NULL COMMENT '取得方法',
     card_id BIGINT NOT NULL COMMENT '取得元カードID',
+    created_time DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '登録日時',
+    updated_time DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '更新日時',
     PRIMARY KEY(id),
     CONSTRAINT fk_t_costume_character_id
         FOREIGN KEY (character_id)
@@ -180,6 +206,8 @@ CREATE TABLE IF NOT EXISTS t_stamp(
     id BIGINT AUTO_INCREMENT NOT NULL COMMENT 'スタンプID',
     character_id BIGINT NOT NULL COMMENT 'キャラクターID',
     acquisition_method SMALLINT NOT NULL COMMENT '取得方法',
+    created_time DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '登録日時',
+    updated_time DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '更新日時',
     PRIMARY KEY(id),
     CONSTRAINT fk_t_stamp_character_id
         FOREIGN KEY (character_id)
@@ -193,6 +221,8 @@ CREATE TABLE IF NOT EXISTS t_bond_rank(
     character_id1 BIGINT NOT NULL COMMENT 'キャラクターID1',
     character_id2 BIGINT NOT NULL COMMENT 'キャラクターID2',
     bond_rank SMALLINT NOT NULL COMMENT 'キズナランク',
+    created_time DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '登録日時',
+    updated_time DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '更新日時',
     PRIMARY KEY(id),
     CONSTRAINT fk_t_bond_rank_character_id1
         FOREIGN KEY (character_id1)
