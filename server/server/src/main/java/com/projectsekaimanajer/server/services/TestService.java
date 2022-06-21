@@ -8,7 +8,7 @@ import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Service;
 
-import com.projectsekaimanajer.server.tables.Unit;
+import com.projectsekaimanajer.server.entities.MUnit;
 
 @Service
 public class TestService {
@@ -17,9 +17,9 @@ public class TestService {
     private JdbcTemplate jdbcTemplate;
 
     @Bean
-    public List<Unit> SelectAllUnits() {
+    public List<MUnit> SelectAllUnits() {
         var query = "SELECT * FROM m_unit";
-        var units = jdbcTemplate.query(query, new BeanPropertyRowMapper<>(Unit.class));
+        var units = jdbcTemplate.query(query, new BeanPropertyRowMapper<>(MUnit.class));
         return units;
     }
 }
