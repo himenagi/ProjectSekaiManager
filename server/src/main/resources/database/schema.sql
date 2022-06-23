@@ -206,6 +206,8 @@ CREATE TABLE IF NOT EXISTS t_stamp(
     id BIGINT AUTO_INCREMENT NOT NULL COMMENT 'スタンプID',
     character_id BIGINT NOT NULL COMMENT 'キャラクターID',
     acquisition_method SMALLINT NOT NULL COMMENT '取得方法',
+    event_name VARCHAR(64) COMMENT 'イベント名',
+    event_start_date DATE COMMENT 'イベント開始日',
     created_time DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '登録日時',
     updated_time DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '更新日時',
     PRIMARY KEY(id),
